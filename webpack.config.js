@@ -57,7 +57,8 @@ module.exports = async (env, options) => {
         filename: "commands.html",
         template: "./src/commands/commands.html",
         chunks: ["polyfill", "commands"]
-      })
+      }),
+	  
     ],
     devServer: {
       headers: {

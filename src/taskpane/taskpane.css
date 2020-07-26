@@ -18,14 +18,19 @@
  
  .ms-welcome__header {
     padding: 20px;
-    padding-bottom: 30px;
-    padding-top: 100px;
+    /*padding-bottom: 30px;*/
+    padding-top: 50px;
     display: -webkit-flex;
     display: flex;
     -webkit-flex-direction: column;
     flex-direction: column;
     align-items: center;
  }
+
+ ._1k5ke6nDxpeUR8lrcSeiY5 .ms-Panel-content {
+    height: 100% !important;
+    overflow-y: hidden;
+}
 
  .ms-welcome__main {
     display: -webkit-flex;
@@ -65,7 +70,7 @@
      margin-top: 30px;
  }
  
-.ms-Button.ms-Button--hero .ms-Button-label {
+/*.ms-Button.ms-Button--hero .ms-Button-label {
   color: #0078d7;
 }
 
@@ -73,8 +78,49 @@
 .ms-Button.ms-Button--hero:focus .ms-Button-label{
   color: #005a9e;
   cursor: pointer;
+}*/
+
+b { 
+    font-weight: bold;
 }
 
-b {
-    font-weight: bold;
+.progressLoader{ 
+    width: 100%;
+    height: 100%;
+    background-image: url(../../assets/progress.gif);
+    background-repeat: no-repeat;
+    background-position: center center;
+    position: absolute;
+    display:none;
+}
+
+.ms-Button{
+    background: #0078D4;
+    border: 1px solid #0078D4;
+    border-radius: 3px;
+    cursor:pointer;
+    outline:none;
+    height:auto;
+}
+.ms-Button-label{
+    color:#ffffff;
+}
+.ms-Button:hover .ms-Button-label {
+    color: #ffffff;
+}
+
+.ms-Button:hover{
+    background:#005A9E;
+}
+
+button#userAuthBtn {
+    padding: 8px 58px;
+    font-size: 18px;
+}
+
+#afterLogin{
+    padding:0 25px;
+}
+.ms-MessageBar--severeWarning,.ms-MessageBar--success{
+    width:100%;
 }

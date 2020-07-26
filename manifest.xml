@@ -10,7 +10,9 @@
   <HighResolutionIconUrl DefaultValue="https://localhost:3000/assets/icon-80.png"/>
   <SupportUrl DefaultValue="https://www.contoso.com/help"/>
   <AppDomains>
-    <AppDomain>contoso.com</AppDomain>
+    <AppDomain>https://login.microsoftonline.com</AppDomain>
+    <AppDomain>https://graph.microsoft.com</AppDomain>
+   <!-- <AppDomain>https://localhost:3000</AppDomain>-->
   </AppDomains>
   <Hosts>
     <Host Name="Mailbox"/>
@@ -24,7 +26,7 @@
     <Form xsi:type="ItemRead">
       <DesktopSettings>
         <SourceLocation DefaultValue="https://localhost:3000/taskpane.html"/>
-        <RequestedHeight>250</RequestedHeight>
+        <RequestedHeight>200</RequestedHeight>
       </DesktopSettings>
     </Form>
   </FormSettings>
@@ -62,7 +64,7 @@
                     <SourceLocation resid="Taskpane.Url"/>
                   </Action>
                 </Control>
-                <Control xsi:type="Button" id="ActionButton">
+                <!--<Control xsi:type="Button" id="ActionButton">
                   <Label resid="ActionButton.Label"/>
                   <Supertip>
                     <Title resid="ActionButton.Label"/>
@@ -77,6 +79,24 @@
                     <FunctionName>action</FunctionName>
                   </Action>
                 </Control>
+                <Control xsi:type="Button" id="SettingButton">
+                  <Label resid="SettingButton.Label"/>
+                  <Supertip>
+                    <Title resid="SettingButton.Label"/>
+                    <Description resid="SettingButton.Tooltip"/>
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="Icon.16x16"/>
+                    <bt:Image size="32" resid="Icon.32x32"/>
+                    <bt:Image size="80" resid="Icon.80x80"/>
+                  </Icon>
+                  <Action xsi:type="ShowTaskpane">
+                    <SourceLocation resid="Setting.Url"/>
+                  </Action>
+                  <Action xsi:type="ExecuteFunction">
+                    <FunctionName>openSettings</FunctionName>
+                  </Action>
+                </Control>-->
               </Group>
             </OfficeTab>
           </ExtensionPoint>
@@ -92,15 +112,18 @@
       <bt:Urls>
         <bt:Url id="Commands.Url" DefaultValue="https://localhost:3000/commands.html"/>
         <bt:Url id="Taskpane.Url" DefaultValue="https://localhost:3000/taskpane.html"/>
+        <bt:Url id="Setting.Url" DefaultValue="https://localhost:3000/settings.html"/>
       </bt:Urls>
       <bt:ShortStrings>
         <bt:String id="GroupLabel" DefaultValue="Contoso Add-in"/>
         <bt:String id="TaskpaneButton.Label" DefaultValue="Show Taskpane"/>
         <bt:String id="ActionButton.Label" DefaultValue="Perform an action"/>
+        <bt:String id="SettingButton.Label" DefaultValue="Setting"/>
       </bt:ShortStrings>
       <bt:LongStrings>
         <bt:String id="TaskpaneButton.Tooltip" DefaultValue="Opens a pane displaying all available properties."/>
         <bt:String id="ActionButton.Tooltip" DefaultValue="Perform an action when clicked."/>
+        <bt:String id="SettingButton.Tooltip" DefaultValue="Manage Addin settings."/>
       </bt:LongStrings>
     </Resources>
   </VersionOverrides>

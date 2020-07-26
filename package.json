@@ -27,7 +27,9 @@
     "watch": "webpack --mode development --watch"
   },
   "dependencies": {
-    "jquery": "^3.5.1"
+    "jquery": "^3.5.1",
+    "showdown": "^1.9.1",
+    "urijs": "^1.19.2"
   },
   "devDependencies": {
     "@babel/core": "^7.10.2",
