@@ -12,7 +12,6 @@ module.exports = async (env, options) => {
     entry: {
       polyfill: "@babel/polyfill",
       taskpane: "./src/taskpane/taskpane.js",
-      commands: "./src/commands/commands.js"
     },
     resolve: {
       extensions: [".ts", ".tsx", ".html", ".js"]
@@ -53,12 +52,6 @@ module.exports = async (env, options) => {
           from: "./src/taskpane/taskpane.css"
         }
       ]),
-      new HtmlWebpackPlugin({
-        filename: "commands.html",
-        template: "./src/commands/commands.html",
-        chunks: ["polyfill", "commands"]
-      }),
-	  
     ],
     devServer: {
       headers: {
@@ -68,6 +61,5 @@ module.exports = async (env, options) => {
       port: process.env.npm_package_config_dev_server_port || 3000
     }
   };
-
   return config;
 };

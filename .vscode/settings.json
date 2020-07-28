@@ -3,6 +3,12 @@
       "javascript",
       "javascriptreact",
       "typescript"
-    ]
+    ],
+    "appService.zipIgnorePattern": [
+      "node_modules{,/**}",
+      ".vscode{,/**}"
+    ],
+    "appService.defaultWebAppToDeploy": "/subscriptions/483a8c40-eebe-49ac-8961-83ed961a08d3/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/soaraddin",
+    "appService.deploySubpath": "."
   }
   

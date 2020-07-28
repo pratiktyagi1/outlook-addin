@@ -29,17 +29,18 @@ var msola = {
     auth: {
       clientId: "91390636-1b1c-4c9e-ae4d-d91f2cde8aa6",
       authority: "https://login.microsoftonline.com/common",
+      redirectUri: "https://localhost:3000/taskpane.html",
       postLogoutRedirectUri: "https://localhost:3000/taskpane.html"
     },  
     cache: {  
-      cacheLocation: "localStorage"          
+      cacheLocation: "sessionStorage"          
     }
   },
   graphConfig:{
     endPoint: "https://graph.microsoft.com/v1.0/me" 
   },
   permissionScope:{
-    scopes: ["https://graph.microsoft.com/mail.readwrite","https://graph.microsoft.com/user.read", "https://graph.microsoft.com/mail.send"]
+    scopes: ["https://graph.microsoft.com/mail.read","https://graph.microsoft.com/user.read", "https://graph.microsoft.com/mail.send"]
   },
   msalInit:function(){
     $(".progressLoader").show();
@@ -50,7 +51,7 @@ var msola = {
     $(".progressLoader").show();
     msola.msalInstance.loginPopup(msola.permissionScope).then(function (id_token) {
       msola.msalInstance.acquireTokenSilent(msola.permissionScope).then(function (result) { 
-        //console.log(result.accessToken);
+        console.log(result.accessToken);
         msola.msAccessToken = result.accessToken; 
         $(".progressLoader").hide();
         $("#afterLogin").show();
@@ -60,7 +61,7 @@ var msola = {
   },
   silentTokenSuccess:function(result){
     console.log('User Already Logged In!');
-    //console.log(result.accessToken);
+    console.log(result.accessToken);
     msola.msAccessToken = result.accessToken;
     $("#beforeLogin").hide();
     $("#afterLogin").show();
@@ -124,6 +125,7 @@ var msola = {
       msola.showSuccessMsg('Email sent successfully !');
      
     }).fail(function(jqXHR, textStatus, errorThrown){
+      console.log(jqXHR);
       msola.showErrorMsg('Unable to send email!');
     });
   },
@@ -132,9 +134,10 @@ var msola = {
     if(receipentEmail){
       $(".progressLoader").show();
       var item = Office.context.mailbox.item;
+      var restId = Office.context.mailbox.convertToRestId(item.itemId, Office.MailboxEnums.RestVersion.v2_0);
       $.ajax({  
         "crossDomain": true,  
-        "url": msola.graphConfig.endPoint+"/messages/"+item.itemId+"/$value",  
+        "url": msola.graphConfig.endPoint+"/messages/"+restId+"/$value",  
         "method": "GET",  
         "headers": { 
             'Authorization': 'Bearer ' + msola.msAccessToken, 
@@ -146,8 +149,8 @@ var msola = {
           msola.sendEmail(mailContent);
         }
       }).fail(function(jqXHR, textStatus, errorThrown){
-        console.log(errorThrown);
-        msola.showErrorMsg('Please try later !');
+        console.log(jqXHR);
+        msola.showErrorMsg('Unable to read the email !');
       });
     }else{
       msola.showErrorMsg('Please enter email !');
@@ -161,7 +164,7 @@ var msola = {
       "message":{
         "subject": "Outlook Add-in Final Test",
         "body": {
-          "contentType": "Html",
+          "contentType": "HTML",
           "content": "<p>Hello Yair</p> This email was sent from outlook add-in. Please test the content of attached eml file. The final flow of the Add-in is ready to be reviewed.<p>Regards,<br/>Vivek Negi</p>"
         },
         "toRecipients": [
